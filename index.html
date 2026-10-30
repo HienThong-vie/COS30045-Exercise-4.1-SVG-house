@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercise 4.1 – SVG House | COS30045</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap">
+  <link rel="icon" href="img/PowerIcon.png">
+  <link rel="stylesheet" href="css/style.css">
+  <!-- EXTRA: D3 for the customise buttons -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/house.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../demo2/index.html">
+        <img src="img/PowerIcon.png" alt="" width="40" height="40">
+        <span>Appliance Energy<small>COS30045 Demonstration 2</small></span>
+      </a>
+      <nav class="site-nav" aria-label="Exercises">
+        <ul>
+          <li><a href="../demo2/index.html">Home</a></li>
+          <li><a href="../dv-03-svg-exercise/index.html" aria-current="page">4.1 SVG House</a></li>
+          <li><a href="../dv-04-bar-chart-exercise/index.html">4.3–4.7 Bar Chart</a></li>
+          <li><a href="../dv-05-multichart-webpage/index.html">5 Multi-chart</a></li>
+          <li><a href="../dv-06-interactivity/index.html">6 Interactivity</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <span class="badge">Exercise 4.1 &middot; SVG</span>
+    <h1>Exercise 4.1: Draw SVGs</h1>
+    <p class="lead">A house and garden drawn by hand with every basic SVG shape:
+      <code>rect</code>, <code>circle</code>, <code>ellipse</code>, <code>line</code>,
+      <code>polyline</code>, <code>polygon</code>, <code>path</code> and <code>text</code>,
+      plus the group element <code>&lt;g&gt;</code>.</p>
+
+    <!-- ============ Step 1 + 3 + 4: the picture ============ -->
+    <section class="card" aria-labelledby="step1">
+      <h2 id="step1">Step 1 &amp; 3: My SVG house and garden</h2>
+      <div class="responsive-svg-container house-frame">
+        <svg id="house" viewBox="0 0 600 400" xmlns="http://www.w3.org/2000/svg" role="img"
+             aria-labelledby="house-title">
+          <title id="house-title">A house and garden drawn with SVG shapes</title>
+
+          <!-- CUSTOMISATION – sky gradient -->
+          <defs>
+            <linearGradient id="sky-gradient" x1="0" y1="0" x2="0" y2="1">
+              <stop id="sky-top" offset="0%" stop-color="#7ec4ea" />
+              <stop id="sky-bottom" offset="100%" stop-color="#e3f4fb" />
+            </linearGradient>
+          </defs>
+
+          <!-- SKY: rect -->
+          <rect id="sky" x="0" y="0" width="600" height="400" fill="url(#sky-gradient)" />
+
+          <!-- CUSTOMISATION – stars (shown in night mode) -->
+          <g id="stars" fill="#fff8d6" opacity="0">
+            <circle cx="40" cy="120" r="2" />
+            <circle cx="230" cy="30" r="1.5" />
+            <circle cx="400" cy="35" r="2" />
+            <circle cx="450" cy="115" r="1.5" />
+            <circle cx="580" cy="160" r="2" />
+            <circle cx="20" cy="20" r="1.5" />
+          </g>
+
+          <!-- CUSTOMISATION – sun rays: one line rotated 8 times -->
+          <g id="sun-rays" stroke="#e0a526" stroke-width="4" stroke-linecap="round">
+            <line x1="520" y1="22" x2="520" y2="8" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(45, 520, 70)" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(90, 520, 70)" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(135, 520, 70)" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(180, 520, 70)" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(225, 520, 70)" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(270, 520, 70)" />
+            <line x1="520" y1="22" x2="520" y2="8" transform="rotate(315, 520, 70)" />
+          </g>
+
+          <!-- SUN: circle -->
+          <circle id="sun" cx="520" cy="70" r="40" fill="#f3cd6a" stroke="#e0a526" stroke-width="4" />
+
+          <!-- CLOUD: ellipses (CUSTOMISATION: third ellipse) -->
+          <g id="cloud" fill="#ffffff">
+            <ellipse cx="110" cy="60" rx="55" ry="22" />
+            <ellipse cx="150" cy="45" rx="40" ry="20" />
+            <ellipse cx="80" cy="50" rx="30" ry="16" />
+          </g>
+
+          <!-- CUSTOMISATION – birds: path with q curves -->
+          <g id="birds" fill="none" stroke="#33415c" stroke-width="2.5" stroke-linecap="round">
+            <path d="M200 55 q 8 -8 16 0 q 8 -8 16 0" />
+            <path d="M245 75 q 6 -6 12 0 q 6 -6 12 0" />
+          </g>
+
+          <!-- CUSTOMISATION – chimney smoke -->
+          <g id="smoke" fill="#d8d8d8">
+            <circle cx="325" cy="85" r="9" fill-opacity="0.7" />
+            <circle cx="338" cy="66" r="12" fill-opacity="0.5" />
+            <circle cx="353" cy="43" r="15" fill-opacity="0.3" />
+          </g>
+
+          <!-- GROUND: rect -->
+          <rect id="ground" x="0" y="320" width="600" height="80" fill="#8cc66d" />
+
+          <!-- CHIMNEY: rect (before the roof) -->
+          <rect id="chimney" x="305" y="100" width="28" height="60" fill="#7d6744" />
+
+          <!-- HOUSE BODY: rect -->
+          <rect id="walls" x="150" y="180" width="220" height="140" fill="#fcf4d2" stroke="#4f3f28" stroke-width="3" />
+
+          <!-- ROOF: polygon (closed shape, list of x,y points) -->
+          <polygon id="roof" points="130,180 260,90 390,180" fill="#b5532a" stroke="#4f3f28" stroke-width="3" />
+
+          <!-- CUSTOMISATION – attic window -->
+          <g id="attic-window" fill="#9fd3f0" stroke="#4f3f28" stroke-width="3">
+            <circle cx="260" cy="140" r="14" />
+            <line x1="246" y1="140" x2="274" y2="140" />
+            <line x1="260" y1="126" x2="260" y2="154" />
+          </g>
+
+          <!-- CUSTOMISATION – doorway behind the door -->
+          <rect id="doorway" x="235" y="240" width="50" height="80" rx="4" fill="#2b2116" />
+
+          <!-- DOOR: rect + circle handle -->
+          <!-- CUSTOMISATION: door colour -->
+          <rect id="door" x="235" y="240" width="50" height="80" rx="4" fill="#8a3d1f" />
+          <circle id="door-handle" cx="276" cy="282" r="4" fill="#f3cd6a" />
+
+          <!-- WINDOWS: group <g> + translate -->
+          <g id="windows" class="windows" fill="#9fd3f0" stroke="#4f3f28" stroke-width="3">
+            <g class="window" transform="translate(170, 205)">
+              <rect x="0" y="0" width="45" height="40" />
+              <line x1="22.5" y1="0" x2="22.5" y2="40" />
+              <line x1="0" y1="20" x2="45" y2="20" />
+            </g>
+            <g class="window" transform="translate(305, 205)">
+              <rect x="0" y="0" width="45" height="40" />
+              <line x1="22.5" y1="0" x2="22.5" y2="40" />
+              <line x1="0" y1="20" x2="45" y2="20" />
+            </g>
+          </g>
+
+          <!-- GARDEN PATH: path with C curves (CUSTOMISATION: dashed edge) -->
+          <path id="garden-path" d="M235 320 C 225 350, 200 370, 185 400 L 305 400 C 295 370, 288 350, 285 320 Z"
+                fill="#d9c7a3" stroke="#a8916a" stroke-width="2" stroke-dasharray="6 4" />
+
+          <!-- CUSTOMISATION – welcome mat -->
+          <rect id="welcome-mat" x="228" y="320" width="64" height="6" rx="3" fill="#b5532a" />
+
+          <!-- FENCE: polyline -->
+          <polyline id="fence" points="20,330 20,300 40,290 60,300 60,330 60,300 80,290 100,300 100,330 100,300 120,290 140,300 140,330"
+                    fill="none" stroke="#ffffff" stroke-width="4" stroke-linejoin="round" />
+
+          <!-- FENCE RAIL: line -->
+          <line id="fence-rail" x1="15" y1="315" x2="145" y2="315" stroke="#ffffff" stroke-width="4" />
+
+          <!-- TREE: rect trunk + circle canopy -->
+          <!-- CUSTOMISATION: wider trunk, canopy outline -->
+          <rect id="trunk" x="457" y="250" width="26" height="75" fill="#7d6744" />
+          <circle id="canopy" cx="470" cy="235" r="42" fill="#4f8f3a" stroke="#2f6b25" stroke-width="3" />
+          <!-- CUSTOMISATION – apples -->
+          <g id="apples" fill="#d9433b">
+            <circle cx="455" cy="220" r="5" />
+            <circle cx="487" cy="228" r="5" />
+            <circle cx="466" cy="255" r="5" />
+          </g>
+
+          <!-- FLOWERS: lines + circles -->
+          <g id="flowers">
+            <line x1="400" y1="345" x2="400" y2="320" stroke="#2f6b25" stroke-width="3" stroke-dasharray="4 2" />
+            <circle cx="400" cy="316" r="7" fill="#e85d75" />
+            <line x1="420" y1="350" x2="420" y2="322" stroke="#2f6b25" stroke-width="3" stroke-dasharray="4 2" />
+            <circle cx="420" cy="318" r="7" fill="#f3cd6a" />
+          </g>
+
+          <!-- TEXT -->
+          <text id="label" x="20" y="385" font-size="20" font-weight="bold" fill="#4f3f28">Thong's House</text>
+        </svg>
+      </div>
+      <p class="source">The svg uses <code>viewBox="0 0 600 400"</code>, so it keeps its shape and scales to the width of the page.</p>
+
+      <!-- EXTRA: D3 buttons -->
+      <div class="controls" aria-label="Customise the picture">
+        <button type="button" class="filter" id="btn-night">Night mode</button>
+        <button type="button" class="filter" id="btn-lights">Turn lights on</button>
+        <button type="button" class="filter" id="btn-door">Open door</button>
+      </div>
+    </section>
+
+    <!-- ============ Step 2: coordinate system ============ -->
+    <section class="card" aria-labelledby="step2">
+      <h2 id="step2">Step 2: The SVG coordinate system</h2>
+      <p>The origin <code>(0, 0)</code> is the <strong>top-left</strong> corner. <code>x</code> grows to the right and
+        <code>y</code> grows <strong>down</strong>, so the ground (<code>y = 320</code>) has a bigger y than the roof top (<code>y = 90</code>).
+        Each red dot marks the coordinate written in the code for that shape.
+        The screenshots show my finished picture, including the Step 3 customisations. Screenshot 3 marks the new items from Step 3.</p>
+      <figure>
+        <img src="img/annotated-shapes-1.png" alt="Finished house picture with a 50 pixel grid. Callouts show rect sky at 0,0; rect walls at x 150 y 180 width 220 height 140; circle sun cx 520 cy 70 r 40; ellipse cloud cx 110 cy 60; polygon roof points 130,180 260,90 390,180; rect door x 235 y 240." loading="lazy">
+        <figcaption class="source">Annotated screenshot 1: rect, circle, ellipse and polygon.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/annotated-shapes-2.png" alt="Finished house picture with a 50 pixel grid. Callouts show the windows group translated to 170,205; circle canopy cx 470 cy 235; polyline fence points; line fence rail from 15,315 to 145,315; path garden path starting at M235 320; text label at x 20 y 385." loading="lazy">
+        <figcaption class="source">Annotated screenshot 2: g, circle, polyline, line, path and text.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/annotated-shapes-3.png" alt="Finished house picture with a 50 pixel grid. Callouts show the Step 3 additions: line sun rays from 520,22 to 520,8 rotated eight times; path birds M200 55 q 8 -8 16 0 q 8 -8 16 0; circle smoke at cx 325 cy 85 r 9; circle attic window cx 260 cy 140 r 14; rect trunk x 457 y 250 width 26 height 75; rect welcome mat x 228 y 320 width 64 height 6." loading="lazy">
+        <figcaption class="source">Annotated screenshot 3: the Step 3 additions (rotated line, curved path, circles and rects).</figcaption>
+      </figure>
+      <div class="table-wrap"><table class="shape-table">
+        <thead><tr><th>Shape</th><th>Attributes that position it</th><th>Used for</th></tr></thead>
+        <tbody>
+          <tr><td><code>rect</code></td><td>x, y (top-left corner), width, height, rx (round corners)</td><td>sky, ground, walls, door, chimney, trunk</td></tr>
+          <tr><td><code>circle</code></td><td>cx, cy (centre), r</td><td>sun, tree canopy, door handle, flowers, smoke, apples, stars</td></tr>
+          <tr><td><code>ellipse</code></td><td>cx, cy, rx, ry</td><td>cloud</td></tr>
+          <tr><td><code>line</code></td><td>x1, y1 → x2, y2</td><td>fence rail, window frames, flower stems, sun rays</td></tr>
+          <tr><td><code>polyline</code></td><td>points (open shape)</td><td>fence</td></tr>
+          <tr><td><code>polygon</code></td><td>points (closes itself)</td><td>roof</td></tr>
+          <tr><td><code>path</code></td><td>d: M (move), C (Bézier curve), Q (quadratic curve), L (line), Z (close)</td><td>garden path, birds</td></tr>
+          <tr><td><code>text</code></td><td>x, y (start of the baseline)</td><td>"Thong's House" label</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <!-- ============ Step 3: customisations ============ -->
+    <section class="card" aria-labelledby="step3">
+      <h2 id="step3">Step 3: Customisations</h2>
+      <p>The changes are grouped like the four points in the exercise brief, and each one is marked with a
+        <code>CUSTOMISATION</code> comment in the code. Annotated screenshot 3 in Step 2 shows where the new items sit.</p>
+      <div class="table-wrap"><table class="shape-table">
+        <thead><tr><th>Brief point</th><th>What I changed</th><th>How (SVG code)</th></tr></thead>
+        <tbody>
+          <tr><td rowspan="3">1. Changing / moving shapes</td><td>Fluffier cloud</td><td>Added a third <code>ellipse</code> to the <code>#cloud</code> group</td></tr>
+          <tr><td>Wider tree trunk</td><td><code>width</code> 20 &rarr; 26 and <code>x</code> 460 &rarr; 457, so it stays centred under the canopy</td></tr>
+          <tr><td>Sun with rays</td><td>One <code>line</code> copied 8 times, each turned with <code>transform="rotate(45, 520, 70)"</code>, 90, 135&hellip; around the sun's centre</td></tr>
+          <tr><td rowspan="2">2. Changing fill colours</td><td>Gradient sky</td><td>Solid <code>#bfe3f5</code> &rarr; <code>&lt;linearGradient id="sky-gradient"&gt;</code> in <code>&lt;defs&gt;</code>, used with <code>fill="url(#sky-gradient)"</code></td></tr>
+          <tr><td>Red-brown front door</td><td><code>fill</code> <code>#4f3f28</code> &rarr; <code>#8a3d1f</code></td></tr>
+          <tr><td rowspan="3">3. Adding / changing strokes</td><td>Stepping-stone path edge</td><td><code>stroke-dasharray="6 4"</code> on the garden <code>path</code></td></tr>
+          <tr><td>Outlined tree canopy</td><td>Added <code>stroke="#2f6b25"</code> and <code>stroke-width="3"</code></td></tr>
+          <tr><td>Round line ends</td><td><code>stroke-linecap="round"</code> on the sun rays and birds; dashed flower stems; <code>stroke-linejoin="round"</code> on the fence</td></tr>
+          <tr><td rowspan="6">4. Adding other items</td><td>Chimney</td><td><code>rect</code> drawn <em>before</em> the roof so the roof hides its bottom (drawing order = stacking order)</td></tr>
+          <tr><td>Garden path and welcome mat</td><td>Curved <code>path</code> (cubic Bézier <code>C</code>); thin <code>rect</code> with <code>rx="3"</code></td></tr>
+          <tr><td>Chimney smoke</td><td>3 <code>circle</code>s, bigger and more see-through (<code>fill-opacity</code>) as they rise</td></tr>
+          <tr><td>Birds</td><td>Two <code>path</code>s, the first <code>d="M200 55 q 8 -8 16 0 q 8 -8 16 0"</code>, with <code>fill="none"</code> (quadratic curves)</td></tr>
+          <tr><td>Attic window, apples</td><td><code>circle</code> + 2 <code>line</code>s in the roof; small <code>circle</code>s drawn after the canopy so they sit on top</td></tr>
+          <tr><td>Stars and doorway</td><td>Stars group starts at <code>opacity="0"</code>; a dark <code>rect</code> sits behind the door. The buttons above show them.</td></tr>
+        </tbody>
+      </table></div>
+      <p>The fill colours come from the power logo used on my energy website.</p>
+    </section>
+
+    <!-- ============ Step 4: group element ============ -->
+    <section class="card" aria-labelledby="step4">
+      <h2 id="step4">Step 4: The group element <code>&lt;g&gt;</code></h2>
+      <p>Both windows sit inside one <code>&lt;g id="windows"&gt;</code>. The fill, stroke and stroke-width are set
+        once on the group and every child inherits them. Each window is its own inner group moved with
+        <code>transform="translate(x, y)"</code>, so the rect and lines inside can use simple coordinates starting at 0,0.</p>
+<pre><code>&lt;g id="windows" class="windows" fill="#9fd3f0" stroke="#4f3f28" stroke-width="3"&gt;
+  &lt;g class="window" transform="translate(170, 205)"&gt;
+    &lt;rect x="0" y="0" width="45" height="40" /&gt;
+    &lt;line x1="22.5" y1="0" x2="22.5" y2="40" /&gt;
+    &lt;line x1="0" y1="20" x2="45" y2="20" /&gt;
+  &lt;/g&gt;
+  &lt;g class="window" transform="translate(305, 205)"&gt; ... same shapes ... &lt;/g&gt;
+&lt;/g&gt;</code></pre>
+    </section>
+
+    <!-- ============ Step 5: DOM ============ -->
+    <section class="card" aria-labelledby="step5">
+      <h2 id="step5">Step 5: Viewing the DOM</h2>
+      <p>Open Developer Tools (F12) → <strong>Elements</strong> and expand <code>&lt;svg id="house"&gt;</code>: every shape is a DOM element,
+        in the same order it is drawn.</p>
+      <figure>
+        <img src="img/dom-devtools.png" alt="Screenshot of the finished SVG house page on the left and the Chrome Developer Tools Elements panel on the right. The svg#house element is expanded and lists, in drawing order, the title, defs, rect sky, g stars, g sun-rays, circle sun, g cloud, g birds, g smoke, rect ground, rect chimney, rect walls, polygon roof, g attic-window, rect doorway, rect door, circle door-handle, g windows, path garden-path, rect welcome-mat and polyline fence, with the CUSTOMISATION comments between them." loading="lazy">
+        <figcaption class="source">Screenshot of the SVG and the DOM in Chrome Developer Tools. The shapes appear in the same order they are drawn; the groups (g) can be expanded to show their children.</figcaption>
+      </figure>
+      <!-- EXTRA: live DOM outline -->
+      <details>
+        <summary>Live DOM outline of the svg (generated with JavaScript)</summary>
+        <pre id="dom-outline"></pre>
+      </details>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 Chung Hien Thong (106212681) &middot; COS30045 Data Visualisation, Swinburne University of Technology.</p>
+    </div>
+  </footer>
+</body>
+</html>
